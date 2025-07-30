@@ -1,0 +1,15 @@
+[package]
+name = "wallet-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+bip39 = "2.2.0"
+rand = { version = "0.8.5", features = ["std"] }
+getrandom = { version = "0.2", features = ["js"] }
+wasm-bindgen = "0.2.100"
+
+

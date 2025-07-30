@@ -13,8 +13,8 @@ function Home() {
         </div>
       </div>
       <div className="flex gap-6">
-        <button className="bg-blue-700 hover:bg-blue-800 text-zinc-100 px-6 py-2 rounded font-semibold transition">Send Crypto</button>
-        <button className="bg-green-700 hover:bg-green-800 text-zinc-100 px-6 py-2 rounded font-semibold transition">Receive Crypto</button>
+        <button className="bg-blue-700 hover:bg-blue-800 text-zinc-100 px-6 py-2 rounded font-semibold ">Send Crypto</button>
+        <button className="bg-green-700 hover:bg-green-800 text-zinc-100 px-6 py-2 rounded font-semibold">Receive Crypto</button>
       </div>
     </div>
   )

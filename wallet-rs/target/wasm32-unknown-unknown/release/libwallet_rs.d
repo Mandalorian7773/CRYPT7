@@ -1,0 +1,1 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/libwallet_rs.rlib: /Users/adityajagrani/Desktop/CRYPT7/wallet-rs/src/lib.rs

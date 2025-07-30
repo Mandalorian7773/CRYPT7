@@ -1,21 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import Explore from './pages/Explore'
-import Wallets from './pages/Wallets'
-import './App.css'
+import {Routes, Route} from 'react-router-dom';
+import Home from './pages/Home.tsx';
+import Wallets from './pages/Wallets.tsx'
+import Navbar from './components/Navbar.tsx'
+import Explore from './pages/Explore.tsx';
 
-function App() {
+
+export default function App () {
   return (
-    <Router>
-      <Navbar />
+    <>
+    <div>
+      <Navbar/>
+    </div>
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/wallets" element={<Wallets />} />
+          <Route path='/' element={<Home />}/>
+          <Route path='/explore' element={<Explore />}/>
+          <Route path='/wallets' element={<Wallets />}/>
       </Routes>
-    </Router>
+     
+    </>
   )
 }
 
-export default App

@@ -1,0 +1,14 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libgetrandom-a54629e8db6a9660.rmeta: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/backends.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/util.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error_std_impls.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/../README.md
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libgetrandom-a54629e8db6a9660.rlib: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/backends.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/util.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error_std_impls.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/../README.md
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/getrandom-a54629e8db6a9660.d: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/backends.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/util.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error_std_impls.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/../README.md
+
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/lib.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/backends.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/util.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/error_std_impls.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.3/src/../README.md:
+
+# env-dep:CARGO_PKG_VERSION=0.3.3
