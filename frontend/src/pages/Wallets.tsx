@@ -1,4 +1,4 @@
-import GenerateWallet from './../components/GenerateWallet'
+import GenerateWallet from '../components/WalletWizard'
 
 function Wallets() {
 
