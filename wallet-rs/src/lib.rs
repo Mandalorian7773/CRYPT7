@@ -79,5 +79,30 @@ pub fn encryption(password: &str) -> Result<JsValue, JsValue> {
 
 }
 
+#[wasm_bindgen]
+pub fn decryption(password: &str, salt: &str, nonce: &str, ciphertext: &str) -> Result<String, JsValue> {
+
+    let salt_bytes = satl.as_bytes();
+    let nonce_bytes = STANDARD.decode(nonce).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    let ciphertext_bytes = STANDARD.decode(ciphertext).map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+    let argon2 = Argon2::default();
+
+    let mut key = [0u8; 32];
+
+    argon2.hash_password_into(password.as_bytes(), Salt.as_str().as_bytes(), &mut key)
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+    let cipher = Aes256Gcm::new_from_slice(&key)
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+    let nonce_obj = Nonce::from_slice(&nonce_bytes);
+
+    let decoded_text = cipher.decrypt(nonce_obj, ciphertext_bytes.as_ref()).map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+    String::from_utf8(decoded_text).map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+}
+
 
 
