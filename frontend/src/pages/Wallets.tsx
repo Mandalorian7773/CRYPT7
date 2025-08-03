@@ -1,19 +1,25 @@
 import GenerateWallet from '../components/WalletWizard'
+import type { RootState } from '../utils/store';
 import { db } from './../utils/db';
 import type { VaultRecord } from './../utils/db';
 import {useState, useEffect} from 'react';
+import { useSelector} from "react-redux";
 
 function Wallets() {
   const [showGenerator, setShowGenerator] = useState<boolean>(false);
-  const [wallets, setWallets] = useState<VaultRecord[]>([]);
+  const [wallet, setWallet] = useState<VaultRecord[]>([]);
+  const isUnlocked = useSelector((state: RootState) => state.wallet.isUnlocked);
+
+  const loadWallets = async() => {
+    const allWallets = await db.wallets.toArray();
+    setWallet(allWallets);
+  };
 
   useEffect(() => {
-    const loadWallets = async() => {
-      const allWallets = await db.wallets.toArray();
-      setWallets(allWallets);
-    };
-    loadWallets();
-  }, []);
+    if(isUnlocked){
+      loadWallets();
+    }
+  });
 
   const handleWalletGen = (): void => {
     setShowGenerator(true);
@@ -29,8 +35,8 @@ function Wallets() {
       <>
       <button className='absolute h-15 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl top-20 right-20' onClick={handleWalletGen}>Create or import a wallet</button>
       <div className='absolute top-30 left-30 grid grid-cols-3 gap-4'>
-        {wallets.map((wallet) => (
-          <div className='bg-gray-900 h-30 w-80 rounded-xl flex justify-center'>{wallet.id}</div>
+        {wallet.map((wallet, index) => (
+          <div key={index} className='bg-gray-900 h-30 w-80 rounded-xl flex justify-center'>{wallet.id}</div>
         ))}
       </div>
       </>

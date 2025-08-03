@@ -3,11 +3,11 @@ import type { Table } from 'dexie';
 
 export interface VaultRecord {
     id?: number;
-    salt: String;
-    nonce: String,
-    ciphertext: String,
-    argon_version: String,
-    argon_params: String,
+    salt: string;
+    nonce: string,
+    ciphertext: string,
+    argon_version: string,
+    argon_params: string,
 }
 
 const DB_NAME = "CRYPT7VAULT"

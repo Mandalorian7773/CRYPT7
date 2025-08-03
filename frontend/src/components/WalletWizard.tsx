@@ -2,6 +2,9 @@ import {useState} from 'react';
 import init, { encryption } from '../pkg/wallet_rs'
 import { motion, AnimatePresence } from "motion/react"
 import { db } from "./../utils/db"
+import { useDispatch, useSelector} from "react-redux";
+import { unlockWallet } from './../utils/walletLocker.ts';
+import type { RootState } from '../utils/store.ts';
 
 interface GenerateWalletProp {
   onClose: () => void;
@@ -12,6 +15,8 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
     const [step, setStep] = useState(1);
     const [password, setPassword] = useState<string>();
     const [confirmPassword, setConfirmPassword] = useState<string>();
+    const isUnlocked = useSelector((state: RootState) => state.wallet.isUnlocked);
+    const dispatch = useDispatch();
 
     const handleEncryption = async (password: String) => {
 
@@ -42,6 +47,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         catch {
           console.log("error saving data")
         }
+        dispatch(unlockWallet(parsedResult.mnemonic));
         
         setStep(3)     
        setMnemonics(parsedResult.mnemonic.split(' '));
@@ -98,7 +104,6 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
                 <div>
                   <button onClick={() => {
                     onClose();
-                    window.location.reload();
                   }} className='h-10 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl'>
                     lesgo
                   </button>
