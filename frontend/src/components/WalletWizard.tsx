@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import init, { encryption } from '../pkg/wallet_rs'
 import { motion, AnimatePresence } from "motion/react"
+import { db } from "./../utils/db"
 
 interface GenerateWalletProp {
   onClose: () => void;
@@ -22,10 +23,28 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         return;
       }
         await init()
-        let result = encryption(password as string);
-        console.log(result);
+        let parsedResult = encryption(password as string);
+        console.log(parsedResult);
+
+        const walletData = {
+          salt: parsedResult.encrypted_data.salt,
+          nonce: parsedResult.encrypted_data.nonce,
+          ciphertext: parsedResult.encrypted_data.ciphertext,
+          argon_version: parsedResult.encrypted_data.argon_version,
+          argon_params: parsedResult.encrypted_data.argon_params,
+          createdAt: Date.now(),
+        }; 
+
+        try {
+          await db.wallets.add(walletData);
+          console.log("Data saved!")
+        }
+        catch {
+          console.log("error saving data")
+        }
+        
         setStep(3)     
-       setMnemonics(result.mnemonic.split(' '));
+       setMnemonics(parsedResult.mnemonic.split(' '));
     }
     
   return (
@@ -36,8 +55,9 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
           
           <AnimatePresence mode='wait'>
             {step === 1 && (
-              <motion.div className='flex flex-col h-full w-full gap-5'>
-                <h1 className="text-2xl font-extrabold mb-20 self-center text-6xl">CRYPT7</h1>
+              <motion.div className='flex flex-col h-full w-full gap-15'>
+                <h1 className="text-2xl font-extrabold mb-15 self-center text-6xl">CRYPT7</h1>
+                <button onClick={onClose} className='absolute top-39 right-129 bg-gray-900 h-10 w-10 rounded-xl'>X</button>
                 <button onClick={() => setStep(2)} className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>CREATE A NEW WALLET</button>
                 <button className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>IMPORT AN EXISTING WALLET</button>
               </motion.div>
@@ -46,6 +66,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
             {step === 2 && (
               <motion.div className='flex flex-col h-full w-full gap-5'>
                 <h1 className="font-extrabold mb-10 self-center text-6xl">CRYPT7</h1>
+                <button onClick={onClose} className='absolute top-39 right-129 bg-gray-900 h-10 w-10 rounded-xl'>X</button>
                 <h3 className='text-3xl font-bold'>Set Password</h3>
                 <input type='password' value={password || ''} onChange={(e) => {setPassword(e.target.value)}} className='bg-gray-800 h-10 text-xl w-80 font-bold outline-none p-2 rounded'/>
                 <h3 className='text-3xl font-bold'>Confirm Password</h3>
@@ -75,7 +96,10 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
                   ))}
                 </div>
                 <div>
-                  <button onClick={onClose} className='h-10 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl'>
+                  <button onClick={() => {
+                    onClose();
+                    window.location.reload();
+                  }} className='h-10 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl'>
                     lesgo
                   </button>
                 </div>
