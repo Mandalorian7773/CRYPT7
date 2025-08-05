@@ -2,8 +2,9 @@ import {useState} from 'react';
 import init, { encryption } from '../pkg/wallet_rs'
 import { motion, AnimatePresence } from "motion/react"
 import { db } from "./../utils/db"
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { unlockWallet } from './../utils/walletLocker.ts';
+import { deriveAccount } from '../utils/wallet';
 
 interface GenerateWalletProp {
   onClose: () => void;
@@ -28,6 +29,10 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         await init()
         let parsedResult = encryption(password as string);
         console.log(parsedResult);
+        const index = 0;
+        let account = await deriveAccount(parsedResult.mnemonic, index);
+
+        console.log(account.address)
 
         const walletData = {
           salt: parsedResult.encrypted_data.salt,
@@ -36,19 +41,28 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
           argon_version: parsedResult.encrypted_data.argon_version,
           argon_params: parsedResult.encrypted_data.argon_params,
           createdAt: Date.now(),
-        }; 
+        };
 
         try {
-          await db.wallets.add(walletData);
+          const vaultId = await db.wallets.add(walletData);
+
+          const AccountData = {
+            address: account.address,
+            index: index,
+            vaultId: vaultId,
+            createdAt: Date.now(),
+        }
+        
+          await db.accounts.add(AccountData);
           console.log("Data saved!")
         }
         catch {
           console.log("error saving data")
         }
+        dispatch(unlockWallet());
         
         setStep(3)     
       setMnemonics(parsedResult.mnemonic.split(' '));
-      
     }
     
   return (
@@ -61,7 +75,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
             {step === 1 && (
               <motion.div className='flex flex-col h-full w-full gap-15'>
                 <h1 className="text-2xl font-extrabold mb-15 self-center text-6xl">CRYPT7</h1>
-               
+                
                 <button onClick={() => setStep(2)} className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>CREATE A NEW WALLET</button>
                 <button className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>IMPORT AN EXISTING WALLET</button>
               </motion.div>
@@ -70,7 +84,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
             {step === 2 && (
               <motion.div className='flex flex-col h-full w-full gap-5'>
                 <h1 className="font-extrabold mb-10 self-center text-6xl">CRYPT7</h1>
-              
+                
                 <h3 className='text-3xl font-bold'>Set Password</h3>
                 <input type='password' value={password || ''} onChange={(e) => {setPassword(e.target.value)}} className='bg-gray-800 h-10 text-xl w-80 font-bold outline-none p-2 rounded'/>
                 <h3 className='text-3xl font-bold'>Confirm Password</h3>
@@ -101,7 +115,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
                 </div>
                 <div>
                   <button onClick={() => {
-                    dispatch(unlockWallet(""))
+                    onClose();
                   }} className='h-10 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl'>
                     lesgo
                   </button>

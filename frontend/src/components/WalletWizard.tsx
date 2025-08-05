@@ -2,9 +2,9 @@ import {useState} from 'react';
 import init, { encryption } from '../pkg/wallet_rs'
 import { motion, AnimatePresence } from "motion/react"
 import { db } from "./../utils/db"
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import { unlockWallet } from './../utils/walletLocker.ts';
-import type { RootState } from '../utils/store.ts';
+import { deriveAccount } from '../utils/wallet';
 
 interface GenerateWalletProp {
   onClose: () => void;
@@ -29,6 +29,10 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         await init()
         let parsedResult = encryption(password as string);
         console.log(parsedResult);
+        const index = 0;
+        let account = await deriveAccount(parsedResult.mnemonic, index);
+
+        console.log(account.address)
 
         const walletData = {
           salt: parsedResult.encrypted_data.salt,
@@ -37,19 +41,28 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
           argon_version: parsedResult.encrypted_data.argon_version,
           argon_params: parsedResult.encrypted_data.argon_params,
           createdAt: Date.now(),
-        }; 
+        };
 
         try {
-          await db.wallets.add(walletData);
+          const vaultId = await db.wallets.add(walletData);
+
+          const AccountData = {
+            address: account.address,
+            index: index,
+            vaultId: vaultId,
+            createdAt: Date.now(),
+        }
+        
+          await db.accounts.add(AccountData);
           console.log("Data saved!")
         }
         catch {
           console.log("error saving data")
         }
-        dispatch(unlockWallet(parsedResult.mnemonic));
+        dispatch(unlockWallet());
         
         setStep(3)     
-       setMnemonics(parsedResult.mnemonic.split(' '));
+      setMnemonics(parsedResult.mnemonic.split(' '));
     }
     
   return (
