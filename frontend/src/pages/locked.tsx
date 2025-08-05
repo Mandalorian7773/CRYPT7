@@ -22,7 +22,7 @@ const Locker: React.FC = () => {
             };
         }
         walletData();
-    });
+    }, []);
 
     const unlock = async () => {       
     const walletData:VaultRecord | undefined = await db.wallets.toCollection().first();
@@ -36,9 +36,14 @@ const Locker: React.FC = () => {
             walletData.salt,
             walletData.nonce,
             walletData.ciphertext,
-            )    
-        dispatch(unlockWallet(mnemonic));
-        setPassword("")
+            ) 
+            
+        if (!mnemonic || mnemonic.trim() === "") {
+            throw new Error("Decryption returned empty");
+            }
+
+        dispatch(unlockWallet());
+        setPassword("");      
         } catch (error) {
           alert("wrong password, try again!");
         }
@@ -51,8 +56,6 @@ const Locker: React.FC = () => {
     }
 
     return (
-
-        
         <div className='h-screen w-full bg-gray-900 flex flex-col justify-center items-center gap-10'>
             <h1 className="text-white text-4xl font-bold">Locked</h1>
             <p className="text-white text-xl font-bold">Enter your password</p>

@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-950 text-white px-6 py-4 flex justify-center items-center shadow">
       <div className="flex gap-10">
-        <NavLink to="/" end className={({ isActive }: { isActive: boolean }) => isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300'}>Home</NavLink>
+        <NavLink to="/" className={({ isActive }: { isActive: boolean }) => isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300'}>Home</NavLink>
         <NavLink to="/explore" className={({ isActive }: { isActive: boolean }) => isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300'}>Explore</NavLink>
         <NavLink to="/wallets" className={({ isActive }: { isActive: boolean }) => isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300'}>Wallets</NavLink>
         {isUnlocked && <button className="bg-black w-20 rounded-xl" onClick={handleLock}>Lock</button>}
@@ -22,4 +22,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar 
+export default Navbar;

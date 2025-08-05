@@ -4,6 +4,7 @@ import { db } from './../utils/db';
 import type { VaultRecord } from './../utils/db';
 import {useState, useEffect} from 'react';
 import { useSelector} from "react-redux";
+import { deriveAccount } from '../utils/wallet';
 
 function Wallets() {
   const [showGenerator, setShowGenerator] = useState<boolean>(false);

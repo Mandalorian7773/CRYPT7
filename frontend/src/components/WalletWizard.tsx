@@ -15,7 +15,6 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
     const [step, setStep] = useState(1);
     const [password, setPassword] = useState<string>();
     const [confirmPassword, setConfirmPassword] = useState<string>();
-    const isUnlocked = useSelector((state: RootState) => state.wallet.isUnlocked);
     const dispatch = useDispatch();
 
     const handleEncryption = async (password: String) => {

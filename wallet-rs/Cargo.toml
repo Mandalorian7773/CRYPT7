@@ -16,6 +16,8 @@ rand = "0.8"
 argon2 = "0.5"
 aes-gcm = "0.10"
 base64 = "0.21"
+ethers-signers = "2.0.14"
+ethers-core = "2.0.14"
 
 
 

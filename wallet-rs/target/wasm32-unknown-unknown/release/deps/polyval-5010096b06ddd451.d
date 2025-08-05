@@ -1,0 +1,10 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libpolyval-5010096b06ddd451.rmeta: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend/soft32.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/mulx.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libpolyval-5010096b06ddd451.rlib: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend/soft32.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/mulx.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/polyval-5010096b06ddd451.d: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend/soft32.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/mulx.rs
+
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/lib.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/backend/soft32.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyval-0.6.2/src/mulx.rs:
