@@ -5,6 +5,7 @@ import type { VaultRecord, AccountRecord } from './../utils/db';
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
+
 function Wallets() {
   const [showGenerator, setShowGenerator] = useState<boolean>(false);
   const [wallets, setWallets] = useState<VaultRecord[]>([]);
@@ -35,11 +36,11 @@ function Wallets() {
 
   return (
     <div className='h-screen w-full flex justify-center items-center'>
-      <div>
-        {showGenerator && <GenerateWallet onClose={() => setShowGenerator(false)} />}
-      </div>
-
-      {!showGenerator && (
+      {showGenerator ? (
+        <div>
+          <GenerateWallet onClose={() => setShowGenerator(false)} />
+        </div>
+      ) : (
         <>
           <button
             className='absolute h-15 w-60 bg-gray-800 hover:bg-gray-900 rounded-xl top-20 right-20 text-white'

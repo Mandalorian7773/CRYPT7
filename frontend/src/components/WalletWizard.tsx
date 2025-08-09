@@ -59,7 +59,8 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         catch {
           console.log("error saving data")
         }
-        dispatch(unlockWallet());
+        dispatch(unlockWallet(account.private_key));
+        console.log(account.private_key)
         
         setStep(3)     
       setMnemonics(parsedResult.mnemonic.split(' '));

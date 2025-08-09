@@ -1,22 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface walletState {
+interface WalletState {
     isUnlocked: boolean;
+    privateKey?: string; 
 }
 
-const initialState: walletState = {
+const initialState: WalletState = {
     isUnlocked: false,
-}
+    privateKey: undefined,
+};
 
 const walletSlice = createSlice({
-    name:"wallet",
+    name: "wallet",
     initialState,
     reducers: {
-        unlockWallet: (state) => {
+        unlockWallet: (state, action: PayloadAction<string>) => {
             state.isUnlocked = true;
+            state.privateKey = action.payload;
         },
         lockWallet: (state) => {
             state.isUnlocked = false;
+            state.privateKey = undefined;
         }
     }
 });
