@@ -59,7 +59,8 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         catch {
           console.log("error saving data")
         }
-        dispatch(unlockWallet());
+        dispatch(unlockWallet(account.private_key));
+        console.log(account.private_key)
         
         setStep(3)     
       setMnemonics(parsedResult.mnemonic.split(' '));
@@ -75,7 +76,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
             {step === 1 && (
               <motion.div className='flex flex-col h-full w-full gap-15'>
                 <h1 className="text-2xl font-extrabold mb-15 self-center text-6xl">CRYPT7</h1>
-                
+              
                 <button onClick={() => setStep(2)} className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>CREATE A NEW WALLET</button>
                 <button className='bg-gray-800 hover:bg-gray-900 p-3 rounded-xl h-20 font-extrabold text-2xl'>IMPORT AN EXISTING WALLET</button>
               </motion.div>
@@ -84,7 +85,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
             {step === 2 && (
               <motion.div className='flex flex-col h-full w-full gap-5'>
                 <h1 className="font-extrabold mb-10 self-center text-6xl">CRYPT7</h1>
-                
+               
                 <h3 className='text-3xl font-bold'>Set Password</h3>
                 <input type='password' value={password || ''} onChange={(e) => {setPassword(e.target.value)}} className='bg-gray-800 h-10 text-xl w-80 font-bold outline-none p-2 rounded'/>
                 <h3 className='text-3xl font-bold'>Confirm Password</h3>
