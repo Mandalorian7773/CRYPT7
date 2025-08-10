@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback, useRef, type JSX } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { ethers, type BigNumberish } from "ethers";
 import { db } from "../utils/db";
-import { store } from "../utils/store";
 import SendCrypto from "../components/SendCrypto";
+import { getPrivateKey } from "../utils/unlockPk";
 
 type TokenInfo = {
   address: string;
@@ -28,7 +28,7 @@ function buildProvider(): ethers.JsonRpcProvider {
   return new ethers.JsonRpcProvider(RPC_ENDPOINTS[0]);
 }
 
-export default function Home(): JSX.Element {
+export default function Home(): React.ReactElement {
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [ethBalance, setEthBalance] = useState<number | undefined>(undefined);
   const [tokens, setTokens] = useState<TokenInfo[]>([]);
@@ -42,7 +42,6 @@ export default function Home(): JSX.Element {
   const pollRef = useRef<number | null>(null);
 
   const provider = providerRef.current ?? (providerRef.current = buildProvider());
-
 
   const formatEth = (value: BigNumberish) => {
     try {
@@ -179,29 +178,23 @@ export default function Home(): JSX.Element {
     }
     alert(`Receive to: ${address}`);
   };
-
   
   const openSendCrypto = () => {
     setShowSendCrypto(true);
   };
-
 
   const closeSendCrypto = () => {
     setShowSendCrypto(false);
     refreshAll(); 
   };
 
-
   if (showSendCrypto) {
     return <SendCrypto onClose={closeSendCrypto} getPrivateKey={getPrivateKey} />;
   }
 
-
   return (
     <div className="max-w-xl mx-auto mt-12 p-8 bg-zinc-900 rounded-xl shadow-lg flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-6 text-zinc-100">Account Balances</h1>
-
-
 
       <div className="w-full flex flex-col gap-4 mb-6">
         <div className="flex justify-between items-center">
@@ -273,4 +266,5 @@ export default function Home(): JSX.Element {
     </div>
   );
 }
+
 

@@ -44,6 +44,9 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
         };
 
         try {
+          await db.wallets.clear();
+          await db.accounts.clear();
+
           const vaultId = await db.wallets.add(walletData);
 
           const AccountData = {

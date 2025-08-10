@@ -2,6 +2,7 @@ use wasm_bindgen::prelude::*;
 mod encryption;
 mod decryption;
 mod derivation;
+mod memory_vault;
 
 #[wasm_bindgen]
 pub fn encryption(password_str: &str) -> Result<JsValue, JsValue> {

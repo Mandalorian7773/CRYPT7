@@ -10,12 +10,18 @@ const Locker: React.FC = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [noWallet, setNoWallet] = useState(false);
+  const [showCreateImport, setShowCreateImport] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [walletExists, setWalletExists] = useState(false);
 
   useEffect(() => {
     (async () => {
       const walletData = await db.wallets.toCollection().first();
-      if (!walletData) setNoWallet(true);
+      if (!walletData) {
+        setNoWallet(true);
+      } else {
+        setWalletExists(true);
+      }
     })();
   }, []);
 
@@ -39,7 +45,7 @@ const Locker: React.FC = () => {
         throw new Error("Invalid password");
       }
 
-      dispatch(unlockWallet(decrypted)); 
+      dispatch(unlockWallet(decrypted));
       setPassword("");
     } catch {
       alert("Wrong password, try again!");
@@ -48,8 +54,31 @@ const Locker: React.FC = () => {
     }
   };
 
-  if (noWallet) {
-    return <GenerateWallet onClose={() => setNoWallet(false)} />;
+  if (noWallet || showCreateImport) {
+    return <GenerateWallet onClose={() => {
+      setNoWallet(false);
+      setShowCreateImport(false);
+    }} />;
+  }
+
+  if (walletExists && !showCreateImport) {
+    return (
+      <div className="h-screen w-full bg-gray-900 flex flex-col justify-center items-center gap-6">
+        <h1 className="text-white text-4xl font-bold">Wallet Options</h1>
+        <button
+          className="bg-gray-600 text-white py-2 px-6 rounded-xl font-semibold"
+          onClick={() => setWalletExists(false)}
+        >
+          Unlock Existing Wallet
+        </button>
+        <button
+          className="bg-gray-600 text-white py-2 px-6 rounded-xl font-semibold"
+          onClick={() => setShowCreateImport(true)}
+        >
+          Create / Import Another Wallet
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -74,4 +103,3 @@ const Locker: React.FC = () => {
 };
 
 export default Locker;
-
