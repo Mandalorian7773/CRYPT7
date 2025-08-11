@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { ethers, type BigNumberish } from "ethers";
-import { db } from "../utils/db";
+import { db, type AccountRecord } from "../utils/db";
 import SendCrypto from "../components/SendCrypto";
 import { getPrivateKey } from "../utils/unlockPk";
+import { useLiveQuery } from "dexie-react-hooks";
 
 type TokenInfo = {
   address: string;
@@ -30,17 +31,18 @@ function buildProvider(): ethers.JsonRpcProvider {
 
 export default function Home(): React.ReactElement {
   const [address, setAddress] = useState<string | undefined>(undefined);
+  const [selectedAccountId, setSelectedAccountId] = useState<number | undefined>(undefined);
   const [ethBalance, setEthBalance] = useState<number | undefined>(undefined);
   const [tokens, setTokens] = useState<TokenInfo[]>([]);
   const [tokenBalances, setTokenBalances] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [networkName] = useState<string>("sepolia");
-  const [showSendCrypto, setShowSendCrypto] = useState(false); 
+  const [showSendCrypto, setShowSendCrypto] = useState(false);
 
   const providerRef = useRef<ethers.JsonRpcProvider | null>(null);
   const pollRef = useRef<number | null>(null);
 
+  const accounts = useLiveQuery(() => db.accounts.toArray(), []);
   const provider = providerRef.current ?? (providerRef.current = buildProvider());
 
   const formatEth = (value: BigNumberish) => {
@@ -54,9 +56,15 @@ export default function Home(): React.ReactElement {
   };
 
   const loadAccountFromDB = useCallback(async () => {
+    if (selectedAccountId && accounts) {
+      const acct = accounts.find((a) => a.id === selectedAccountId);
+      return acct?.address;
+    }
+    
     const acct = await db.accounts.toCollection().first();
-    return acct?.address as string | undefined;
-  }, []);
+    if (acct) setSelectedAccountId(acct.id);
+    return acct?.address;
+  }, [selectedAccountId, accounts]);
 
   const fetchEthBalance = useCallback(
     async (addr: string) => {
@@ -178,14 +186,14 @@ export default function Home(): React.ReactElement {
     }
     alert(`Receive to: ${address}`);
   };
-  
+
   const openSendCrypto = () => {
     setShowSendCrypto(true);
   };
 
   const closeSendCrypto = () => {
     setShowSendCrypto(false);
-    refreshAll(); 
+    refreshAll();
   };
 
   if (showSendCrypto) {
@@ -196,10 +204,24 @@ export default function Home(): React.ReactElement {
     <div className="max-w-xl mx-auto mt-12 p-8 bg-zinc-900 rounded-xl shadow-lg flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-6 text-zinc-100">Account Balances</h1>
 
+   
+      {accounts && accounts.length > 0 && (
+        <div className="mb-4 w-full">
+          <select className="bg-gray-800 text-white px-4 py-2 rounded w-full" value={selectedAccountId ?? ""} onChange={(e) => setSelectedAccountId(Number(e.target.value))}>
+            {accounts.map((acc, index) => (
+              <option key={acc.id ?? ""} value={acc.id ?? ""}>
+                {`Wallet ${index + 1}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+
       <div className="w-full flex flex-col gap-4 mb-6">
         <div className="flex justify-between items-center">
           <div className="text-sm text-zinc-400">Network</div>
-          <div className="text-sm text-zinc-200">{networkName}</div>
+          <div className="text-sm text-zinc-200">Sepolia</div>
         </div>
 
         <div className="flex justify-between items-baseline gap-4">
