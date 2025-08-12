@@ -11,8 +11,8 @@ interface GenerateWalletProp { onClose: () => void; }
 const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
   const [mnemonics, setMnemonics] = useState<string[]>(Array(12).fill(''));
   const [step, setStep] = useState(1);
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [isImport, setIsImport] = useState(false);
   const [mnemonicCount, setMnemonicCount] = useState(12);
   const dispatch = useDispatch();
@@ -21,55 +21,96 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
     const newMnemonics = [...mnemonics];
     newMnemonics[index] = value.trim().toLowerCase();
     setMnemonics(newMnemonics);
+
+  };
+
+  const validateMnemonicCount = (words: string[]) => {
+    const validCounts = [12, 15, 18, 21, 24];
+    return validCounts.includes(words.length);
   };
 
   const handleEncrypt = async () => {
     if (!password || password !== confirmPassword || password.length < 8) {
-      alert("invalid password!");
+      alert("Invalid password or passwords do not match!");
       return;
     }
     await init();
-    let mnemonicStr = mnemonics.join(' ');
+
+    let mnemonicStr = mnemonics.join(' ').trim();
     let parsedResult;
+
     if (isImport) {
-      parsedResult = await import_wallet(password, mnemonicStr);
-    } else {
-      parsedResult = await encryption(password);
-      mnemonicStr = parsedResult.mnemonic;
-      setMnemonics(mnemonicStr.split(' '));
+      const words = mnemonics.slice(0, mnemonicCount).map(w => (w || '').trim()).filter(Boolean);
+      if (!validateMnemonicCount(words)) {
+        alert(`Mnemonic has invalid word count: ${words.length}. Must be 12, 15, 18, 21, or 24.`);
+        setStep(2);
+        return;
+      }
+      const normalized = words.join(' ');
+      try {
+        parsedResult = await import_wallet(normalized, password);
+      } catch (e) {
+        alert("Failed to import wallet. Check your mnemonic and try again.");
+        console.error(e);
+        setStep(2);
+        return;
+      }
     }
-    const index = 0;
-    let account = await deriveAccount(mnemonicStr, index);
-    const walletData = {
-      salt: parsedResult.encrypted_data.salt,
-      nonce: parsedResult.encrypted_data.nonce,
-      ciphertext: parsedResult.encrypted_data.ciphertext,
-      argon_version: parsedResult.encrypted_data.argon_version,
-      argon_params: parsedResult.encrypted_data.argon_params,
-      createdAt: Date.now(),
-    };
+     else {
+      try {
+        parsedResult = await encryption(password);
+        mnemonicStr = parsedResult.mnemonic;
+        setMnemonics(mnemonicStr.split(' '));
+      } catch (e) {
+        alert("Failed to create wallet.");
+        console.error(e);
+        return;
+      }
+    }
+
+    if (!parsedResult?.encrypted_data) {
+      alert("Something went wrong during encryption/import.");
+      return;
+    }
+
     try {
+      const index = 0;
+      let account = await deriveAccount(mnemonicStr, index);
+      const walletData = {
+        salt: parsedResult.encrypted_data.salt,
+        nonce: parsedResult.encrypted_data.nonce,
+        ciphertext: parsedResult.encrypted_data.ciphertext,
+        argon_version: parsedResult.encrypted_data.argon_version,
+        argon_params: parsedResult.encrypted_data.argon_params,
+        createdAt: Date.now(),
+      };
+
       const vaultId = await db.wallets.add(walletData);
       await db.accounts.add({ address: account.address, index, vaultId, createdAt: Date.now() });
-    } catch {}
-    dispatch(unlockWallet(account.private_key));
-    setStep(4);
+      dispatch(unlockWallet(account.private_key));
+      setStep(4);
+    } catch (e) {
+      alert("Failed to save wallet data locally.");
+      console.error(e);
+    }
   };
 
   const renderMnemonicInputs = () => (
     <div className="grid grid-cols-4 gap-4 max-w-full overflow-x-hidden">
       {Array(mnemonicCount).fill(0).map((_, i) => (
-        <input
-          key={i}
-          type="text"
-          value={mnemonics[i] || ''}
-          onChange={e => handleMnemonicChange(i, e.target.value)}
-          className="bg-gray-800 text-white p-2 rounded outline-none text-center font-semibold text-xl w-full max-w-[12rem]"
-          maxLength={15}
-          autoComplete="off"
-          spellCheck={false}
-          aria-label={`Mnemonic word ${i + 1}`}
-        />
+        <div key={i} className="flex flex-col items-center">
+          <label className="mb-1 text-white font-semibold">{i + 1}</label>
+          <input
+            type="text"
+            value={mnemonics[i] || ''}
+            onChange={e => handleMnemonicChange(i, e.target.value)}
+            className="bg-gray-800 text-white p-2 rounded outline-none text-center font-semibold text-xl w-full max-w-[12rem]"
+            maxLength={15}
+            autoComplete="off"
+            spellCheck={false}
+            aria-label={`Mnemonic word ${i + 1}`}
+          />
+        </div>
       ))}
     </div>
   );
@@ -120,8 +161,8 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
                   {renderMnemonicInputs()}
                   <button
                     onClick={() => setStep(3)}
-                    disabled={mnemonics.some(word => word.trim() === '')}
-                    className={`mt-8 h-14 rounded-xl font-extrabold text-2xl bg-gray-800 hover:bg-gray-900 ${mnemonics.some(word => word.trim() === '') ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={mnemonics.slice(0, mnemonicCount).some(word => word.trim() === '')}
+                    className={`mt-8 h-14 rounded-xl font-extrabold text-2xl bg-gray-800 hover:bg-gray-900 ${mnemonics.slice(0, mnemonicCount).some(word => word.trim() === '') ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     Next
                   </button>
@@ -142,7 +183,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
               <h3 className="text-3xl font-bold">Set Password</h3>
               <input
                 type="password"
-                value={password || ''}
+                value={password}
                 onChange={e => setPassword(e.target.value)}
                 className="bg-gray-800 h-12 text-xl w-full font-bold outline-none p-3 rounded"
                 autoComplete="new-password"
@@ -150,7 +191,7 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
               <h3 className="text-3xl font-bold">Confirm Password</h3>
               <input
                 type="password"
-                value={confirmPassword || ''}
+                value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
                 className="bg-gray-800 h-12 text-xl w-full font-bold outline-none p-3 rounded"
                 autoComplete="new-password"
@@ -179,6 +220,9 @@ const GenerateWallet: React.FC<GenerateWalletProp> = ({ onClose }) => {
 };
 
 export default GenerateWallet;
+
+
+
 
 
 
