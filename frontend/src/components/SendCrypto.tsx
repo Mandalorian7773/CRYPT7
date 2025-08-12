@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect} from "react";
 import { ethers } from "ethers";
 import { db } from "../utils/db";
 
@@ -6,13 +6,6 @@ interface SendCryptoProp {
   onClose: () => void;
   getPrivateKey: () => Promise<string | null>; 
 }
-
-type TokenInfo = {
-  address: string;
-  symbol: string;
-  decimals: number;
-  name?: string;
-};
 
 const RPC_ENDPOINTS = [
   `https://eth-sepolia.g.alchemy.com/v2/${import.meta.env.VITE_ALCHEMY_API_KEY}`,
@@ -88,13 +81,13 @@ const onSend = async () => {
       await txResponse.wait();
       alert(`Transaction sent: ${txResponse.hash}`);
     } catch (err) {
-      console.error(err);
       if (err instanceof Error) {
-        alert(`Error sending transaction: ${err.message}`);
+        setError(`Error sending transaction: ${err.message}`);
       } else {
-        alert(`Error sending transaction: ${String(err)}`);
+        setError(`Error sending transaction: ${String(err)}`);
       }
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };

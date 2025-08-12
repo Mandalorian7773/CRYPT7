@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { ethers, type BigNumberish } from "ethers";
-import { db, type AccountRecord } from "../utils/db";
+import { db } from "../utils/db";
 import SendCrypto from "../components/SendCrypto";
 import { getPrivateKey } from "../utils/unlockPk";
 import { useLiveQuery } from "dexie-react-hooks";
