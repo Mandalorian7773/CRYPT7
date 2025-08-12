@@ -3,6 +3,7 @@ mod encryption;
 mod decryption;
 mod derivation;
 mod memory_vault;
+mod import_wallet;
 
 #[wasm_bindgen]
 pub fn encryption(password_str: &str) -> Result<JsValue, JsValue> {

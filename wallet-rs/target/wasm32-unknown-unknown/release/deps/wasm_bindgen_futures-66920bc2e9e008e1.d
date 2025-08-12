@@ -1,0 +1,9 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-66920bc2e9e008e1.rmeta: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/queue.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-66920bc2e9e008e1.rlib: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/queue.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/wasm_bindgen_futures-66920bc2e9e008e1.d: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/queue.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
+
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/lib.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/queue.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs:

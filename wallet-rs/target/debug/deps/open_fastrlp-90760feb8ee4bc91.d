@@ -1,0 +1,10 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/debug/deps/libopen_fastrlp-90760feb8ee4bc91.rmeta: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/decode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/encode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/types.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/debug/deps/libopen_fastrlp-90760feb8ee4bc91.rlib: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/decode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/encode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/types.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/debug/deps/open_fastrlp-90760feb8ee4bc91.d: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/decode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/encode.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/types.rs
+
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/lib.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/decode.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/encode.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/open-fastrlp-0.1.4/src/types.rs:

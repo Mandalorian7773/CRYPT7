@@ -1,0 +1,10 @@
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libthiserror-8af56e2d9f7b3223.rmeta: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/aserror.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/display.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/var.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/libthiserror-8af56e2d9f7b3223.rlib: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/aserror.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/display.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/var.rs
+
+/Users/adityajagrani/Desktop/CRYPT7/wallet-rs/target/wasm32-unknown-unknown/release/deps/thiserror-8af56e2d9f7b3223.d: /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/lib.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/aserror.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/display.rs /Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/var.rs
+
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/lib.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/aserror.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/display.rs:
+/Users/adityajagrani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.14/src/var.rs:
