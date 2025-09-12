@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+
 # Crypt7 Wallet – MVP  
 
 Crypt7 is a **non-custodial Ethereum wallet MVP** that allows users to create wallets, manage tokens, and performs transactions — all in a simple, secure, and developer-friendly way.  
@@ -32,6 +35,7 @@ flowchart TD
 
 ## License  
 MIT License – free to use, modify, and distribute.  
+
 
 
 
