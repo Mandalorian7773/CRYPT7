@@ -24,9 +24,10 @@ Crypt7 is a **non-custodial Ethereum wallet MVP** that allows users to create wa
 ```mermaid
 flowchart TD
     A["User Interface (React + TS)"] -->|"Generates Wallet / Sends TX"| B["Ethers.js"]
-    B -->|"Signs TX Locally"| C["Private Key Management (RUST(Super secure)"]
+    B -->|"Signs TX Locally"| C["Private Key Management RUST(Super secure)"]
     B -->|"Sends Signed TX"| D["Ethereum Network - Sepolia"]
     D -->|"Updates Balances"| A
+
 
 
 
