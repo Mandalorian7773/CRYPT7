@@ -14,8 +14,8 @@ Crypt7 is a **non-custodial Ethereum wallet MVP** that allows users to create wa
 
 ## Tech Stack  
 - **Frontend:** React + TypeScript  
-- **Blockchain:** Ethereum (via Ethers.js or Web3.js)  
-- **Backend (optional):** Rust (for key management or APIs, if needed)  
+- **Blockchain:** Ethereum (via Ethers.js)  
+- **Backend (optional):** Rust (for key management)  
 
 ---
 
@@ -27,3 +27,4 @@ flowchart TD
     B -->|Signs TX Locally| C[Private Key Storage (Local)]
     B -->|Sends Signed TX| D[Ethereum Network]
     D -->|Updates Balances & State| A
+
