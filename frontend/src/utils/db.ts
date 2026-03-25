@@ -30,22 +30,33 @@ export interface TransactionRecord {
     asset: string
     timestamp: number
     status: 'pending' | 'confirmed' | 'failed'
-  }
-  
+}
+
+export interface TokenRecord {
+    id?: number;
+    address: string;
+    symbol: string;
+    decimals: number;
+    name?: string;
+    vaultId?: number;
+}
+
 
 const DB_NAME = "CRYPT7VAULT";
 
 class WalletDatabase extends Dexie {
     wallets!: Table<VaultRecord>;
     accounts!: Table<AccountRecord>;
-    transactions!: Table<TransactionRecord>
+    transactions!: Table<TransactionRecord>;
+    tokens!: Table<TokenRecord>;
 
     constructor() {
         super(DB_NAME)
-        this.version(1).stores({
+        this.version(2).stores({
             wallets: '++id, createdAt',
             accounts: '++id, vaultId, address, index',
-            transactions: '++id, accountId, timestamp'
+            transactions: '++id, accountId, txHash, timestamp',
+            tokens: '++id, address, symbol, vaultId'
         })
     }
 }

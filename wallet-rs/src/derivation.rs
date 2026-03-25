@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 use bip39::{Mnemonic, Language};
 use ethers_signers::{coins_bip39::English, MnemonicBuilder, Signer};
-use ethers_core::utils::hex;
+use ethers_core::utils::{hex, to_checksum};
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -21,8 +21,10 @@ pub fn derive_wallet(mnemonic: &str, path: &str) -> Result<JsValue, JsValue> {
         .build()
         .map_err(|e| JsValue::from_str(&e.to_string()))?;
 
-    let address = wallet.address().to_string();
-    let private_key = hex::encode(wallet.signer().to_bytes());
+    // Format address with proper EIP-55 checksum
+    let address = to_checksum(&wallet.address(), None);
+    // Include 0x prefix for private key to ensure ethers.js compatibility
+    let private_key = format!("0x{}", hex::encode(wallet.signer().to_bytes()));
 
     let account = Account {
         address,

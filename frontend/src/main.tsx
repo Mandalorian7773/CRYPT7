@@ -5,15 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx'
 import { store } from "./utils/store.ts";
 import { Provider } from "react-redux";
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={ store }>
-      <BrowserRouter>
-        
-        <App />
-        
-      </BrowserRouter>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ErrorBoundary>
   </StrictMode>
 )
